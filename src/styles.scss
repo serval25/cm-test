@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Helvetica, "Helvetica Neue", sans-serif; }
+textarea {
+	width: 100%;
+	height: 200px;
+	resize: none;
+}

@@ -1,0 +1,27 @@
+
+<div class="main">
+    <mat-toolbar class="main-toolbar">
+        <div class="main-toolbar-item" routerLinkActive="active-link" [routerLink]="['/pages/nodes']">Nodes</div>
+        <div class="main-toolbar-item" routerLinkActive="active-link" [routerLink]="['/pages/computations']">Computations</div>
+        <div class="main-toolbar-item" routerLinkActive="active-link" [routerLink]="['/pages/requests']">Pending requests</div>
+        <div class="main-toolbar-item" routerLinkActive="active-link" [routerLink]="['/pages/requests']">In progress</div>
+        <div class="main-toolbar-item" routerLinkActive="active-link" [routerLink]="['/pages/requests']">Completed</div>
+        <div class="main-toolbar-item" routerLinkActive="active-link" [routerLink]="['/pages/users']">Users & Orgs</div>
+        <div class="main-toolbar-item">Preferences</div>
+    </mat-toolbar>
+    <div class="topbar">
+        <img class="topbar-notification" src="https://cdn-icons-png.flaticon.com/512/2058/2058148.png" alt="notification icon"/>
+        <img class="topbar-userpic" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="userpic"/>
+    </div>
+    <mat-sidenav-container>
+        <mat-sidenav>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+
+
+

@@ -1,0 +1,37 @@
+table {
+    width: 100%;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+mat-header-cell, mat-cell {
+    justify-content: center;
+}
+
+.requestor {
+    width: 200px;
+    display: flex;
+}
+
+.requestor-userpic {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+.requestor-name {
+    padding-top: 8px;
+    padding-left: 15px;
+}
+
+.actions {
+    float: right;
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.actions-item {
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 20px;
+}
