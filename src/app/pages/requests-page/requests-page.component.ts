@@ -1,4 +1,5 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { ApproveModalComponent } from 'src/app/common/components/modals/approve-modal/approve-modal.component';
@@ -29,26 +30,25 @@ const { BackendClient } = require("src/app/common/data/backend/backend_grpc_web_
 	templateUrl: './requests-page.component.html',
 	styleUrls: ['./requests-page.component.scss'],
 })
-export class RequestPageComponent {
+export class RequestPageComponent implements OnInit {
 	public requestList = new ListRequestsRequest();
 	// public dataSource = ELEMENT_DATA;
 	public dataSource: RequestDTO[] = [];
 	public requestIds: [] = [];
 	public requestorIds: [] = [];
 	public requestors: {[key: string]: RequestorDTO} = {};
-	public client = new BackendClient("http://mock.ciphermode.com:50051", null, null);
+	public client = new BackendClient(atob("aHR0cDovL21vY2suY2lwaGVybW9kZS5jb206NTAwNTE="), null, null);
 	displayedColumns: string[] = ['checked', 'name', 'inputs', 'results', 'requestor', 'submitted'];
 	constructor(
 		private dialog: MatDialog,
 		private cd: ChangeDetectorRef,
+		private router: Router,
 	) {}
 
 	ngOnInit() {
 		this.requestIds = [];
-		this.cd.detectChanges();
 		this.client.listRequests(this.requestList, {}, (err: any, res: any) => {
 			if (err) {
-			  console.log(err);
 			  return;
 			}
 			this.requestIds = res.array[0];
@@ -68,12 +68,9 @@ export class RequestPageComponent {
 				new GetRequestRequest(element),
 				{},
 				(err: any, res: any) => {
-					console.log ('GetRequestRequest ' , element, typeof element);	
 				if (err) {
-					console.log (err);
 				}
 				if (res) {
-					console.log ('res = ', res);
 					data.push(
 						{
 							checked: false,
@@ -123,9 +120,7 @@ export class RequestPageComponent {
 
 	public getRequestorById(id: string) {
 		this.client.getUserInfo(new GetUserInfoRequest(id), {}, (err: any, res: any) => {
-			console.log ('getRequestorById ' , id, typeof id);
 			if (err) {
-			  console.log (err);
 			}
 			if (res) {
 				this.requestors[id] = {
@@ -167,7 +162,6 @@ export class RequestPageComponent {
 
 	public sortData(sort?: Sort) {
 		const data = this.dataSource.slice();
-		console.log (data);
 		if (sort) {
 			if (!sort.active || sort.direction === '') {
 				this.dataSource = data;
@@ -215,4 +209,7 @@ export class RequestPageComponent {
 		});
 	}
 
+	public reload() {
+		this.router.navigate(['/pages/requests']);
+	}
 }

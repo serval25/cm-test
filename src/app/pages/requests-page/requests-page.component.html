@@ -2,15 +2,29 @@
   <div>
     <h1>Pending Requests</h1>
   </div>
-  <div>
-      <div class="actions">
-          <button mat-button class="actions-item" (click)="approve()"  [disabled]="isSomeSelected || countSelected() > 1"> Approve Request</button>
-          <button mat-button class="actions-item" (click)="needInfo()" [disabled]="isSomeSelected || countSelected() > 1"> More info needed</button>
-          <button mat-button class="actions-item" (click)="deny()" [disabled]="isSomeSelected || countSelected() > 1"> Deny Request</button>
-          <button mat-button class="actions-item" (click)="delete()" [disabled]="isSomeSelected || countSelected() > 1"> Delete Request</button>
+  <ng-container *ngIf="countSelected() > 1">
+    <div>
+      <mat-card>
+        <mat-card-content>You can't approve, deny or delete multiple requests at this version of app!</mat-card-content>
+      </mat-card>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="countSelected() <= 1">
+    <div class="message">
+      <mat-card>
+        <mat-card-content>A very important messages will be here</mat-card-content>
+      </mat-card>
+    </div>
+  </ng-container>
+  <ng-template [ngIf]="dataSource.length > 0" [ngIfElse]="showPending">
+      <div>
+          <div class="actions">
+              <button mat-button class="actions-item" (click)="approve()"  [disabled]="isSomeSelected || countSelected() > 1"> Approve Request</button>
+              <button mat-button class="actions-item" (click)="needInfo()" [disabled]="isSomeSelected || countSelected() > 1"> More info needed</button>
+              <button mat-button class="actions-item" (click)="deny()" [disabled]="isSomeSelected || countSelected() > 1"> Deny Request</button>
+              <button mat-button class="actions-item" (click)="delete()" [disabled]="isSomeSelected || countSelected() > 1"> Delete Request</button>
+          </div>
       </div>
-  </div>
-  <ng-container>
       <div class="table-container">
         <table 
           mat-table [dataSource]="dataSource" 
@@ -75,5 +89,10 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
     </div>
-  </ng-container>
+  </ng-template>
+  <ng-template #showPending>
+    <div (click)="reload()">
+      Loading...tap to refresh
+    </div>
+  </ng-template>
 </div>

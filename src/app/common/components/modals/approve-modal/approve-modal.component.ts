@@ -10,7 +10,7 @@ const { BackendClient } = require("src/app/common/data/backend/backend_grpc_web_
   styleUrls: ['./approve-modal.component.scss']
 })
 export class ApproveModalComponent {
-  public client = new BackendClient("http://mock.ciphermode.com:50051", null, null);
+  public client = new BackendClient(atob("aHR0cDovL21vY2suY2lwaGVybW9kZS5jb206NTAwNTE="), null, null);
 
   constructor(
 		public dialogRef: MatDialogRef<ApproveModalComponent>,

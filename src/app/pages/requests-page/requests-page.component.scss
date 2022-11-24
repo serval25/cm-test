@@ -8,6 +8,11 @@ mat-header-cell, mat-cell {
     justify-content: center;
 }
 
+.message {
+    opacity: 0;
+    user-select: none;
+}
+
 .requestor {
     width: 200px;
     display: flex;
@@ -34,4 +39,131 @@ mat-header-cell, mat-cell {
     text-transform: uppercase;
     cursor: pointer;
     padding: 20px;
+}
+
+.skeletons {
+	table {
+		margin-left: 0;
+		margin-right: 0;
+		width: 100%;
+	}
+	.skeleton {
+		pointer-events: none;
+		animation: pulse 0.9s infinite alternate;
+
+		&-row {
+			margin-bottom: 25px;
+		}
+
+		&-item {
+			padding: 20px 25px;
+			border-bottom: 1px solid #e0e0e0;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			&:after {
+				content: '';
+				display: table;
+				clear: both;
+			}
+		}
+
+		&-left {
+			float: left;
+			width: 50%;
+		}
+
+		&-right {
+			float: right;
+			width: 50%;
+		}
+
+		&-line {
+			height: 15px;
+			margin-bottom: 10px;
+			opacity: 0.3;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			&_grey {
+				background-color: grey;
+			}
+
+			&_grey-light {
+				background-color: #d4d4d4;
+			}
+
+			&_red {
+				background-color: red;
+			}
+
+			&_100 {
+				width: 100px;
+			}
+
+			&_150 {
+				width: 150px;
+			}
+
+			&_200 {
+				width: 200px;
+			}
+
+			&_fl {
+				float: left;
+			}
+
+			&_fr {
+				float: right;
+			}
+		}
+
+		&-item-circles {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		&-circle {
+			display: block;
+			background-color: #d4d4d4;
+			border-radius: 50%;
+			width: 56px;
+			height: 56px;
+		}
+
+		&-costs {
+			border-radius: 50%;
+			width: 264px;
+			height: 264px;
+			border: 48px solid grey;
+			padding: 0;
+			text-align: center;
+			margin: 0 auto 40px;
+			opacity: 0.5;
+		}
+
+		@keyframes pulse {
+			0% {
+				opacity: 0.5;
+			}
+
+			100% {
+				opacity: 0.85;
+			}
+		}
+
+		@keyframes fade-slide-in {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 0.85;
+			}
+		}
+	}
 }
